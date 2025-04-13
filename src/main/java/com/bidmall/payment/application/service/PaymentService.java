@@ -1,9 +1,11 @@
 package com.bidmall.payment.application.service;
 
 import com.bidmall.payment.application.port.in.ProcessPaymentUseCase;
+import com.bidmall.payment.application.port.in.dto.ProcessPaymentCommand;
 import com.bidmall.payment.application.port.out.LoadPaymentPort;
 import com.bidmall.payment.application.port.out.PaymentGatewayPort;
 import com.bidmall.payment.application.port.out.SavePaymentPort;
+import com.bidmall.payment.application.port.out.dto.PaymentGatewayResponse;
 import com.bidmall.payment.domain.model.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,7 +39,7 @@ public class PaymentService implements ProcessPaymentUseCase {
         Payment savedPayment = savePaymentPort.savePayment(payment);
 
         // 결제 게이트웨이를 통한 실제 결제 요청
-        PaymentGatewayPort.PaymentGatewayResponse response = paymentGatewayPort.requestPayment(
+        PaymentGatewayResponse response = paymentGatewayPort.requestPayment(
                 savedPayment.getId(),
                 savedPayment.getAmount(),
                 savedPayment.getCurrency(),

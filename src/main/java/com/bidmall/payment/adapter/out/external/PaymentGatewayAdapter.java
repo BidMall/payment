@@ -1,11 +1,15 @@
 package com.bidmall.payment.adapter.out.external;
 
+import com.bidmall.payment.adapter.out.external.dto.PaymentRequest;
+import com.bidmall.payment.adapter.out.external.dto.PaymentResponse;
+import com.bidmall.payment.adapter.out.external.dto.RefundRequest;
+import com.bidmall.payment.adapter.out.external.dto.RefundResponse;
 import com.bidmall.payment.application.port.out.PaymentGatewayPort;
+import com.bidmall.payment.application.port.out.dto.PaymentGatewayResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 /**
  * 외부 결제 게이트웨이 어댑터
@@ -66,66 +70,5 @@ public class PaymentGatewayAdapter implements PaymentGatewayPort {
                 response.getTransactionId(),
                 response.getMessage()
         );
-    }
-
-    /**
-     * 외부 결제 게이트웨이 요청 객체
-     */
-    record PaymentRequest(
-            String paymentId,
-            BigDecimal amount,
-            String currency,
-            String paymentMethod
-    ) {}
-
-    /**
-     * 외부 결제 게이트웨이 응답 객체
-     */
-    record PaymentResponse(
-            boolean success,
-            String transactionId,
-            String message
-    ) {
-        public boolean isSuccess() {
-            return success;
-        }
-
-        public String getTransactionId() {
-            return transactionId;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-    }
-
-    /**
-     * 외부 환불 게이트웨이 요청 객체
-     */
-    record RefundRequest(
-            String paymentId,
-            String refundId,
-            BigDecimal amount
-    ) {}
-
-    /**
-     * 외부 환불 게이트웨이 응답 객체
-     */
-    record RefundResponse(
-            boolean success,
-            String transactionId,
-            String message
-    ) {
-        public boolean isSuccess() {
-            return success;
-        }
-
-        public String getTransactionId() {
-            return transactionId;
-        }
-
-        public String getMessage() {
-            return message;
-        }
     }
 } 

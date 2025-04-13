@@ -15,3 +15,4 @@ alwaysApply: true
 - 객체 생성은 복잡한 경우 (필드가 4개 이상) 롬복의 builder 를 사용합니다.
 - Entity 의 ID 는 Long 타입으로 합니다.
 - Jpa 의 ID 생성은 @Generated(strategy = IDENTITY) 로 합니다.
+- Request, Response, 등등 DTO 는 별도의 클래스로 구성합니다.
